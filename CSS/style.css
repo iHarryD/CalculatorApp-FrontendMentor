@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan&display=swap");
+
+/* Global Reset */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root Variables */
+
+:root {
+  --main-ff: "Spartan", sans-serif;
+  --key-width: clamp(40px, 3vw + 31px, 100px);
+  --key-height: clamp(25px, 2vw + 20px, 60px);
+  --key-shadow-mag: 0 3px 0;
+  --main-background-clr: hsl(222, 26%, 31%);
+  --keypad-background-clr: hsl(223, 31%, 20%);
+  --display-clr: hsl(224, 36%, 15%);
+  --key-clr: hsl(30, 25%, 89%);
+  --key-shadow-clr: hsl(28, 16%, 65%);
+  --reset-del-key-clr: hsl(225, 21%, 49%);
+  --reset-del-key-shadow-clr: hsl(224, 28%, 35%);
+  --equal-key-clr: hsl(6, 63%, 50%);
+  --equal-key-shadow-clr: hsl(6, 70%, 34%);
+  --main-text-clr: #fff;
+  --secondary-text-clr: hsl(221, 14%, 31%);
+}
+
+body.theme-2 {
+  --main-background-clr: hsl(0, 0%, 90%);
+  --keypad-background-clr: hsl(0, 5%, 81%);
+  --display-clr: hsl(0, 0%, 93%);
+  --key-clr: hsl(45, 7%, 89%);
+  --key-shadow-clr: hsl(35, 11%, 61%);
+  --reset-del-key-clr: hsl(185, 42%, 37%);
+  --reset-del-key-shadow-clr: hsl(185, 58%, 25%);
+  --equal-key-clr: hsl(25, 98%, 40%);
+  --equal-key-shadow-clr: hsl(25, 99%, 27%);
+  --main-text-clr: #fff;
+  --secondary-text-clr: hsl(60, 10%, 19%);
+}
+
+body.theme-3 {
+  --main-background-clr: hsl(268, 75%, 9%);
+  --keypad-background-clr: hsl(268, 71%, 12%);
+  --display-clr: hsl(268, 71%, 12%);
+  --key-clr: hsl(268, 47%, 21%);
+  --key-shadow-clr: hsl(290, 70%, 36%);
+  --reset-del-key-clr: hsl(281, 89%, 26%);
+  --reset-del-key-shadow-clr: hsl(285, 91%, 52%);
+  --equal-key-clr: hsl(176, 100%, 44%);
+  --equal-key-shadow-clr: hsl(177, 92%, 70%);
+  --main-text-clr: hsl(52, 100%, 62%);
+  --secondary-text-clr: #fff;
+}
+
+/* Basics */
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  background: var(--main-background-clr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  max-width: 80%;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+input {
+  -webkit-appearance: none;
+}
+
+/* Typography */
+
+main * {
+  font-family: var(--main-ff);
+  font-weight: 700;
+}
+
+#top {
+  color: var(--main-text-clr);
+}
+
+#calc {
+  font-size: clamp(0.8rem, 3vw + 1rem, 1.8rem);
+}
+
+#display {
+  font-size: clamp(1.5rem, 1.3rem + 3vw, 2.5rem);
+  color: var(--main-text-clr);
+  word-break: break-all;
+}
+
+button:not(.differ-fs) {
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 1.5rem);
+}
+
+.differ-fs {
+  font-size: clamp(0.5rem, 1vw + 0.4rem, 1.2rem);
+  color: var(--main-text-clr);
+}
+
+body.theme-2 #top,
+body.theme-2 #display {
+  color: var(--secondary-text-clr);
+}
+
+body.theme-3 .keys {
+  color: var(--main-text-clr);
+}
+
+body.theme-3 .differ-fs {
+  color: var(--secondary-text-clr);
+}
+
+body.theme-3 .keys[value="equal"] {
+  color: hsl(198, 20%, 13%);
+}
+
+/* Styling */
+
+#primary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3em;
+}
+
+#top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#theme-span {
+  width: 65px;
+  height: 25px;
+  border-radius: 50px;
+  background: var(--keypad-background-clr);
+  padding: 5px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+#theme-span::before {
+  content: "1 2 3";
+  font-size: 0.7rem;
+  width: 100%;
+  letter-spacing: 7px;
+  position: absolute;
+  top: -70%;
+  left: 10%;
+}
+
+#theme-span::after {
+  content: "THEME";
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  position: absolute;
+  width: max-content;
+  left: -115%;
+  top: 7px;
+}
+
+.theme {
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 50px;
+}
+
+.theme:checked {
+  background: var(--equal-key-clr);
+}
+
+#display {
+  width: 100%;
+  min-height: 91px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 0.55em;
+  background: var(--display-clr);
+  border-radius: 0.7rem;
+}
+
+#keypad {
+  background: var(--keypad-background-clr);
+  border-radius: 0.7rem;
+  padding: clamp(1em, 1vw + 0.7em, 1.5em);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1em, 1vw + 0.7em, 1.5em);
+}
+
+.keys {
+  width: var(--key-width);
+  height: var(--key-height);
+  border-radius: 0.6rem;
+  background: var(--key-clr);
+  box-shadow: var(--key-shadow-mag) var(--key-shadow-clr);
+  cursor: pointer;
+}
+
+.keys[value="reset"] {
+  width: auto;
+  grid-column: 1 / span 2;
+}
+
+.keys[value="equal"] {
+  width: auto;
+  grid-column: 3 / span 2;
+  background: var(--equal-key-clr);
+  box-shadow: var(--key-shadow-mag) var(--equal-key-shadow-clr);
+}
+
+.keys[value="reset"],
+.keys[value="del"] {
+  background: var(--reset-del-key-clr);
+  box-shadow: var(--key-shadow-mag) var(--reset-del-key-shadow-clr);
+}
+
+/* Effects */
+
+.keys:hover {
+  transform: scale(1.02);
+}
+
+.keys:active {
+  transform: scale(0.98);
+}
